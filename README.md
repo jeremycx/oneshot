@@ -1,3 +1,22 @@
+UPDATE
+======
+Almost worked, but ended up stymied by Firefox 4, of all things.
+
+There's no way in FireFox to "log out" a user in a way that it will
+not pop up a login dialog on the next attempt.
+
+It seems FF thinks that if it's got digest info for a given site, any
+failure should pop up a login box. It should always try at least
+twice, in case the nonce has shifted.
+
+Drat. So close.
+
+The attached code has a lot of testing avenues left in it, maybe it
+may be of use to someone else some day.
+
+-- signing off.
+
+
 Introduction
 ============
 This module implements HTTP digest authentication in such a way that

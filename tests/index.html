@@ -9,9 +9,14 @@ $(document).ready(function(){
     var theform = $("#oneshot");
     var target = theform.attr("action");
     theform.submit(function(event) {
+//        $.ajax({
+//            async: false,
+//            url: target+"?logout",
+//            username: "",
+//            password: ""
+//        });
         $.ajax({
             url: target,
-            async: false,
             error: function() {
                 theform.fadeOut(200).fadeIn(200).fadeOut(200).fadeIn(200);
             },
@@ -19,9 +24,6 @@ $(document).ready(function(){
                 window.location = target;
                 // below will exempt the login page from browser history
                 // window.location.replace(target); 
-            },
-            beforeSend: function(xhr) {
-                xhr.setRequestHeader("X-Oneshot", "yes");
             },
             username: $("#oneshot #username").val(),
             password: $("#oneshot #password").val()
@@ -41,7 +43,7 @@ $(document).ready(function(){
       <b>thedude</b> and <b>abides</b> as username and password to see a successful
       authentication. You should not, at any time, see a browser login popup.
     </p>
-    <form id="oneshot" action="/protected/ping.html">
+    <form id="oneshot" action="/protected/index.html">
       Username: <input id="username"><br>
       Password: <input id="password" type="password"><br>
       <input type="submit">
