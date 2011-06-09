@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Oneshot Demo</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script> 
+    <script type="text/javascript">
+$(document).ready(function(){
+    var theform = $("#oneshot");
+    var target = theform.attr("action");
+    theform.submit(function(event) {
+        $.ajax({
+            url: target,
+            async: false,
+            error: function() {
+                theform.fadeOut(200).fadeIn(200).fadeOut(200).fadeIn(200);
+            },
+            success: function() {
+                window.location = target;
+                // below will exempt the login page from browser history
+                // window.location.replace(target); 
+            },
+            beforeSend: function(xhr) {
+                xhr.setRequestHeader("X-Oneshot", "yes");
+            },
+            username: $("#oneshot #username").val(),
+            password: $("#oneshot #password").val()
+        });
+        event.preventDefault();
+    });
+});
+    </script>
+  </head>
+  <body>
+    <h1>Oneshot</h1>
+    <p>
+      This demonstrates oneshot digest authentication for express.
+    </p>
+    <p>
+      Use the below form to test authentication. Use a login of
+      <b>thedude</b> and <b>abides</b> as username and password to see a successful
+      authentication. You should not, at any time, see a browser login popup.
+    </p>
+    <form id="oneshot" action="/protected/ping.html">
+      Username: <input id="username"><br>
+      Password: <input id="password" type="password"><br>
+      <input type="submit">
+    </form>
+  </body>
+</html>
